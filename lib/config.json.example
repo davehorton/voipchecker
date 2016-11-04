@@ -1,0 +1,73 @@
+{
+  "drachtioServer" : {
+    "address": "127.0.0.1",
+    "secret" : "cymru"
+  },
+  "checks": {
+    "dns": [
+      {
+        "type": "SRV",
+        "hostname": "foo.bar.com",
+        "expects": [{
+          "priority": 10,
+          "weight": 3,
+          "port": 5060,
+          "name": "foo1.bar.com"
+        }]
+      }
+    ], 
+    "register": [
+      {
+        "domain": "foo.bar.com",
+        "user": "1234",
+        "password": "4567",
+        "expects": {
+          "registrar": "162.243.62.115"
+        }
+      }
+    ]
+  },
+  "alerts": {
+    "events": [
+      {
+        "name": "DNS-FAILED",
+        "description": "Dns query failed with error",
+        "throttle": "5 mins"
+      },
+      {
+        "name": "DNS-UNEXPECTED",
+        "description": "Dns query returned unexpected results",
+        "throttle": "5 mins"
+      },
+      {
+        "name": "DNS-SUCCESS",
+        "description": "Dns query returned expected results",
+        "resolves": ["DNS-FAILED", "DNS-UNEXPECTED"],
+        "notify": false
+      },
+      {
+        "name": "REG-FAILED",
+        "description": "REGISTER failed",
+        "throttle": "2 min"
+      },
+      {
+        "name": "REG-BACKUP",
+        "description": "REGISTER succeeded, but was handled by a backup server",
+        "throttle": "2 min"
+      },
+      {
+        "name": "REG-SUCCESS",
+        "description": "REGISTER succeeded",
+        "resolves": ["REG-FAILED","REG-BACKUP"],
+        "notify": false      
+      }
+    ], 
+    "serviceKeys": [ "service-key1", "service-key2", {level: 3, keys: ["service-key3", "service-key4"]}
+    ]
+  },
+  "log": {
+    "file": "/tmp/checker.log",
+    "maxsize": 10000000,
+    "maxFiles": 10
+  }
+}

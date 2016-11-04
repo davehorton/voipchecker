@@ -1,0 +1,33 @@
+{
+  "name": "voipchecker",
+  "version": "0.0.1",
+  "description": "check if a voip server app is running by attempting to register",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davehorton/voipchecker.git"
+  },
+  "dependencies": {
+    "async": "^1.4.2",
+    "debug": "^2.2.0",
+    "drachtio": "^1.0.2",
+    "drachtio-srf": "^1.0.5",
+    "lodash": "^4.11.1",
+    "moment": "^2.12.0",
+    "passport": "^0.3.2",
+    "passport-http": "^0.3.0",
+    "winston": "^2.2.0",
+    "pagerduty-plus": "^0.0.2"
+  },
+  "devDependencies": {},
+
+  "author": "Dave Horton",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/davehorton/voipchecker/issues"
+  },
+  "homepage": "https://github.com/davehorton/voipchecker#readme"
+}
