@@ -86,13 +86,18 @@ setInterval( function() {
       check.hostport = app.hostport ;
       regCheck( check, function(err, req, res) {
         if( err ) {
+          var details = {
+            domain: check.domain,
+            user: check.user,
+            error: err.message
+          } ;
+          if( res ) {
+            details.callid = res.get('Call-ID') ;
+            details.cseq = res.get('CSeq') ;
+          }
           alerter.alert('REG-FAILED', {
             target: `${check.domain}:${check.user}`,
-            details: {
-              domain: check.domain,
-              user: check.user,
-              error: err.message
-            }
+            details: details
           }) ;
           return logger.error(`register failed for host ${check.domain}: ${err.message}`) ;
         }
